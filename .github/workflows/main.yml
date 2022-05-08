@@ -1,0 +1,51 @@
+name: Synchronous # 部署
+ 
+on: # 触发条件
+  push:
+    branches:
+      - main # 推送到 main 分支（这里的分支名很重要，不要弄错了）
+      - update
+ 
+  release:
+    types:
+      - published # 推送新版本号
+ 
+  workflow_dispatch: # 手动触发
+ 
+jobs:
+  workers:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout # Checkout 仓库
+      uses: actions/checkout@v3
+      with:
+        ref: main
+        
+    - name: Checkout repo
+      uses: actions/checkout@v3
+      with:
+        repository: qystudio0/qystudio0.github.io
+        path: public
+
+    - name: Deploy to Cloudflare Workers
+      uses: cloudflare/wrangler-action@1.3.0
+      with:
+        apiToken: ${{ secrets.CF_WORKERS_TOKEN }}
+
+  ftp1:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v3
+      with:
+        repository: qystudio0/qystudio0.github.io
+
+    - name: Sync files
+      uses: SamKirkland/FTP-Deploy-Action@4.3.0
+      with:
+        server: ${{ secrets.FTP_SERVER }}
+        username: ${{ secrets.FTP_USERNAME }}
+        password: ${{ secrets.FTP_PASSWORD }}
+        local-dir: ./
