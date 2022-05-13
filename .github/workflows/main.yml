@@ -3,7 +3,7 @@ name: Synchronous # 部署
 'on':
   - workflow_dispatch
   - push
-  
+
 jobs:
   workers:
     runs-on: ubuntu-latest
