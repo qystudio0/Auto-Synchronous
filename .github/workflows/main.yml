@@ -3,13 +3,7 @@ name: Synchronous # 部署
 'on':
   - workflow_dispatch
   - push
- 
-  release:
-    types:
-      - published # 推送新版本号
- 
-  workflow_dispatch: # 手动触发
- 
+  
 jobs:
   workers:
     runs-on: ubuntu-latest
