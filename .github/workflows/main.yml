@@ -1,10 +1,8 @@
 name: Synchronous # 部署
- 
-on: # 触发条件
-  push:
-    branches:
-      - main # 推送到 main 分支（这里的分支名很重要，不要弄错了）
-      - update
+
+'on':
+  - workflow_dispatch
+  - push
  
   release:
     types:
