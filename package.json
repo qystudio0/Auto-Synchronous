@@ -1,5 +1,5 @@
 {
   "dependencies": {
-    "@cloudflare/wrangler": "^1.19.11"
+    "@cloudflare/wrangler": "1.19.12"
   }
 }
